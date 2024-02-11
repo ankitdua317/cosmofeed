@@ -14,11 +14,7 @@ const AllCategories = ({ list }: AllCategoriesProps) => {
   return (
     <>
       {list?.map((item, index) => (
-        <Link
-          key={index}
-          href={`/products?search=${item}`}
-          className="mx-2 my-1"
-        >
+        <Link key={index} href={`/products/${item}`} className="mx-2 my-1">
           {item}
         </Link>
       ))}
@@ -32,12 +28,8 @@ const Header = () => {
 
   useEffect(() => {
     const getAllCategories = async () => {
-      try {
-        const res = await fetchAllCategories();
-        setAllCategories(res);
-      } catch (error) {
-        //TODO:: Handle error
-      }
+      const response = await fetchAllCategories();
+      setAllCategories(response);
     };
 
     getAllCategories();
