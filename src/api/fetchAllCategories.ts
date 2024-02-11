@@ -1,8 +1,8 @@
+import { get } from ".";
+
 const fetchAllCategories = async () => {
   try {
-    const res = await fetch("https://dummyjson.com/products/categories");
-    const data = await res.json();
-    return data as string[];
+    return get<string[]>("https://dummyjson.com/products/categories");
   } catch {
     return [];
   }
