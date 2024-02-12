@@ -7,7 +7,7 @@ const Hamburger = (props: Props) => (
     <g
       fill="none"
       fillRule="evenodd"
-      stroke="currentColor"
+      stroke="#fff"
       strokeLinecap="round"
       strokeLinejoin="round"
     >

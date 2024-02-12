@@ -1,28 +1,34 @@
-import { PRODUCT_QUERY_LIMIT } from "@/constants/common";
-import { Product } from "@/models/Product";
-import fetchProductList from "@/api/fetchProductList";
-import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
+import { useRouter } from "next/router";
+import { PRODUCT_QUERY_LIMIT } from "@/constants/common";
+import { Product, ProductData } from "@/models/Product";
 import fetchProductByCategory from "@/api/fetchProductByCategory";
 
-const useProductList = (category: string) => {
-  const [productList, setProductList] = useState<Product[]>([]);
+const useProductList = (initialProductsData: ProductData) => {
+  const { query } = useRouter();
   const [loading, setLoading] = useState(false);
+  const { total, products } = initialProductsData;
+  const [productList, setProductList] = useState<Product[]>(products);
   const [skip, setSkip] = useState(PRODUCT_QUERY_LIMIT);
+  const [totalCount, setTotalCount] = useState(total);
 
   const fetchNext = useCallback(async () => {
-    setLoading(true);
-    const productData = await fetchProductByCategory(
-      category,
-      PRODUCT_QUERY_LIMIT,
-      skip
-    );
-    if (productData) {
-      setProductList((prev) => prev.concat(...productData.products));
+    if (totalCount > skip) {
+      setLoading(true);
+      const productData = await fetchProductByCategory(
+        query.category as string,
+        PRODUCT_QUERY_LIMIT,
+        skip
+      );
+      if (productData) {
+        const { total, products } = productData;
+        setProductList((prev) => prev.concat(...products));
+        setTotalCount(total);
+      }
+      setSkip((prev) => prev + PRODUCT_QUERY_LIMIT);
+      setLoading(false);
     }
-    setLoading(false);
-    setSkip((prev) => prev + PRODUCT_QUERY_LIMIT);
-  }, [category, skip]);
+  }, [query.category, skip, totalCount]);
 
   return { productList, loading, fetchNext };
 };

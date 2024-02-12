@@ -46,7 +46,9 @@ const SideDrawer = ({
           })`,
         }}
       >
-        {children}
+        <article className="relative max-w-lg flex flex-col overflow-y-scroll h-full">
+          {children}
+        </article>
       </section>
     </>
   );

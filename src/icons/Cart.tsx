@@ -7,7 +7,7 @@ const Cart = ({ className, pathClassName }: Partial<IconProps>) => (
   <svg
     width="24"
     height="24"
-    fill="currentColor"
+    fill="#fff"
     viewBox="0 0 16 16"
     className={className}
   >

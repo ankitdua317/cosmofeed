@@ -50,7 +50,7 @@ const ProductCard = ({ product }: Props) => {
       <h4 className="mt-3 truncate">{title}</h4>
       <p>${price}</p>
       <button
-        className="border text-center py-2 px-6 w-full text-sm mt-4"
+        className="border border-black text-center py-2 px-6 w-full text-sm mt-4"
         onClick={() => handleAddToCart()}
       >
         {quantity === 0 ? (
