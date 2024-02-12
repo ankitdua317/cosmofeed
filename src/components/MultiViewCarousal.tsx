@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ProductCarousal } from "@/models/Home";
 import Carousal from "./Carousal";
-import getAllImages from "@/utils/common";
+import { getAllImages } from "@/utils/common";
 
 interface ImageProps {
   src: string;

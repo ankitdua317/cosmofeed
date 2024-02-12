@@ -24,6 +24,8 @@ const useProductList = (initialProductsData: ProductData) => {
         const { total, products } = productData;
         setProductList((prev) => prev.concat(...products));
         setTotalCount(total);
+      } else {
+        setTotalCount(-Infinity);
       }
       setSkip((prev) => prev + PRODUCT_QUERY_LIMIT);
       setLoading(false);
