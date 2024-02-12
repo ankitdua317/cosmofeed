@@ -63,6 +63,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
       return {
         props: {
           initialProductsData,
+          key: params.category,
         },
       };
     }
