@@ -1,15 +1,14 @@
-import { Data } from "@/models/Home";
+import { Banner, Data } from "@/models/Home";
+import BannerImage from "./BannerImage";
 
 const RenderLayouts = ({ components }: Data) => {
   return (
     <>
-      {components.map((item, index) => {
-        switch (item.name) {
+      {components.map(({ name, props }, index) => {
+        switch (name) {
           case "herobanner":
             return (
-              <div key={`${item.name}-${index}`} className="text-black">
-                Hero banner
-              </div>
+              <BannerImage key={`${name}-${index}`} {...(props as Banner)} />
             );
           default:
             return null;
