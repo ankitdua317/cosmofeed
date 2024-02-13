@@ -6,7 +6,6 @@ import useProductList from "@/hooks/useProductList";
 import usePagination from "@/hooks/usePagination";
 import fetchProductByCategory from "@/api/fetchProductByCategory";
 import Spinner from "@/components/Spinner";
-import MyApp from "@/components/MyApp";
 
 interface Props {
   initialProductsData: ProductData;
@@ -29,25 +28,18 @@ const ProductListingPage = ({ initialProductsData }: Props) => {
   }
 
   return (
-    <main className="bg-white pb-[100px]">
-      <MyApp>
-        <section className="md:px-[100px] px-[30px] mt-8">
-          <h2 className="capitalize">{query.category}</h2>
-          <div className="mt-6 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 gap-y-8 md:gap-y-12">
-            {productList.map((product) => (
-              <div key={product.id}>
-                <ProductCard product={product} />
-              </div>
-            ))}
+    <section className="md:px-[100px] px-[30px] mt-8">
+      <h2 className="capitalize">{query.category}</h2>
+      <div className="mt-6 grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 gap-y-8 md:gap-y-12">
+        {productList.map((product) => (
+          <div key={product.id}>
+            <ProductCard product={product} />
           </div>
-          {loading && <Spinner />}
-          <div
-            ref={infiniteScrollRef}
-            className={loading ? "hidden" : undefined}
-          />
-        </section>
-      </MyApp>
-    </main>
+        ))}
+      </div>
+      {loading && <Spinner />}
+      <div ref={infiniteScrollRef} className={loading ? "hidden" : undefined} />
+    </section>
   );
 };
 

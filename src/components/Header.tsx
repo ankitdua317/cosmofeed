@@ -7,27 +7,7 @@ import Cart from "@/icons/Cart";
 import User from "@/icons/User";
 import Hamburger from "@/icons/Hamburger";
 import SideDrawer from "./SideDrawer";
-
-interface AllCategoriesProps {
-  list?: string[];
-  className?: string;
-}
-
-const AllCategories = ({ list, className }: AllCategoriesProps) => {
-  return (
-    <>
-      {list?.map((item, index) => (
-        <Link
-          key={index}
-          href={`/products/${item}`}
-          className={`mx-2 my-1 ${className} capitalize`}
-        >
-          {item}
-        </Link>
-      ))}
-    </>
-  );
-};
+import AllCategories from "./AllCategories";
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -48,7 +28,9 @@ const Header = () => {
   return (
     <header className="w-full">
       <div className="flex items-center justify-center bg-white p-8">
-        <h1 className="font-bold text-black">Urban</h1>
+        <Link href="/" className="font-bold text-4xl">
+          Urban
+        </Link>
       </div>
       <div className="flex items-center justify-between lg:justify-center bg-black py-5 px-6 lg:px-10">
         {categories.length > 0 ? (
@@ -72,7 +54,11 @@ const Header = () => {
       >
         <div className="flex flex-col py-4 pl-4">
           <h2 className="font-bold my-4">All Categories</h2>
-          <AllCategories list={categories} className="text-black" />
+          <AllCategories
+            list={categories}
+            className="text-black"
+            onLinkClick={() => setIsSideDrawerVisible(false)}
+          />
         </div>
       </SideDrawer>
     </header>
