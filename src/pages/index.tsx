@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import fetchHomePageData from "@/api/fetchHomePageData";
+import usePageCache from "@/hooks/usePageCache";
 import RenderLayouts from "@/components/RenderLayout";
 import { Component } from "@/models/Home";
 import {
@@ -9,7 +10,6 @@ import {
   HOME_PAGE_TITLE,
   PAGE_HASH_COOKIE_NAME,
 } from "@/constants/common";
-import usePageCache from "@/hooks/usePageCache";
 
 interface Props {
   components?: Component[];

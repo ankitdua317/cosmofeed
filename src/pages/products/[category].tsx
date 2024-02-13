@@ -5,9 +5,9 @@ import ProductCard from "@/components/ProductCard";
 import { ProductData } from "@/models/Product";
 import useProductList from "@/hooks/useProductList";
 import usePagination from "@/hooks/usePagination";
+import usePageCache from "@/hooks/usePageCache";
 import Spinner from "@/components/Spinner";
 import { PAGE_HASH_COOKIE_NAME } from "@/constants/common";
-import usePageCache from "@/hooks/usePageCache";
 
 interface Props {
   initialProductsData?: ProductData;

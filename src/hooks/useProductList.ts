@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import fetchProductByCategory from "@/api/fetchProductByCategory";
 import { PRODUCT_QUERY_LIMIT } from "@/constants/common";
 import { Product, ProductData } from "@/models/Product";
-import fetchProductByCategory from "@/api/fetchProductByCategory";
 
 const useProductList = (initialProductsData?: ProductData) => {
   const { query } = useRouter();

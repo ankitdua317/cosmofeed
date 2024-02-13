@@ -14,7 +14,7 @@ const SideDrawer = ({
   direction = "LEFT",
   children,
 }: Props) => {
-  const handleclose = () => {
+  const handleClose = () => {
     onClose(false);
   };
 
@@ -34,7 +34,7 @@ const SideDrawer = ({
           visibility: isOpen ? "visible" : "hidden",
         }}
       >
-        <button className="w-screen h-full" onClick={handleclose} />
+        <button className="w-screen h-full" onClick={handleClose} />
       </section>
       <section
         className={`fixed max-w-sm min-w-[320px] ${

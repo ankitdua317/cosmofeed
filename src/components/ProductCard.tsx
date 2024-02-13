@@ -1,10 +1,11 @@
 import Image from "next/image";
-import { Product } from "@/models/Product";
 import useAddToCart from "@/hooks/useAddToCart";
+import { Product } from "@/models/Product";
 
 interface Props {
   product: Product;
 }
+
 const ProductCard = ({ product }: Props) => {
   const { title, id, images, price } = product;
   const { quantity, onAddOrRemoveFromCart } = useAddToCart(id);
