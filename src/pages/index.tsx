@@ -1,20 +1,23 @@
-import { GetStaticProps } from "next";
-import DATA from "@/constants/home";
+import { GetServerSideProps } from "next";
+import fetchHomePageData from "@/api/fetchHomePageData";
 import RenderLayouts from "@/components/RenderLayout";
 import { Data } from "@/models/Home";
 
-export default function Home({ components }: Data) {
+const Home = ({ components }: Data) => {
   return (
     <section className="flex min-h-screen flex-col items-center justify-between">
       <RenderLayouts components={components} />
     </section>
   );
-}
+};
 
-export const getStaticProps: GetStaticProps<Data> = () => {
+export const getServerSideProps: GetServerSideProps<Data> = async () => {
+  const { components } = await fetchHomePageData();
   return {
     props: {
-      components: DATA.components,
+      components,
     },
   };
 };
+
+export default Home;

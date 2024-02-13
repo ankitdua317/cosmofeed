@@ -1,19 +1,11 @@
+import { PropsWithChildren, TouchEventHandler, useRef, useState } from "react";
 import Caret from "@/icons/Caret";
-import {
-  PropsWithChildren,
-  TouchEventHandler,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
 
 interface Props {
   pages: number;
   carouselClassName?: string;
   handlerClassName?: string;
   title?: string;
-  isAutoplay?: boolean;
-  autoplayTime?: number;
 }
 
 const Carousal = ({
@@ -22,8 +14,6 @@ const Carousal = ({
   handlerClassName,
   title,
   children,
-  isAutoplay = false,
-  autoplayTime = 2000,
 }: PropsWithChildren<Props>) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [touchStarted, setTouchStarted] = useState<number | null>(null);
@@ -80,18 +70,6 @@ const Carousal = ({
     setTouchStarted(null);
   };
 
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (isAutoplay) {
-      timer = setInterval(() => {
-        setCurrentPage((prev) => (prev === pages - 1 ? 0 : prev + 1));
-      }, autoplayTime);
-    }
-    return () => {
-      clearInterval(timer);
-    };
-  }, [isAutoplay, autoplayTime, pages]);
-
   return (
     <>
       <section
@@ -99,11 +77,23 @@ const Carousal = ({
       >
         <h5 className="text-black font-semibold">{title}</h5>
         <div className="flex">
-          <button className="mr-4 p-4" onClick={handlePrevClick}>
-            <Caret className="rotate-180" />
+          <button
+            disabled={currentPage == 0}
+            className="mr-4 p-4"
+            onClick={handlePrevClick}
+          >
+            <Caret
+              className={`rotate-180 ${currentPage == 0 && "fill-neutral-300"}`}
+            />
           </button>
-          <button className="p-4" onClick={handleNextClick}>
-            <Caret />
+          <button
+            disabled={currentPage == pages - 1}
+            className="p-4"
+            onClick={handleNextClick}
+          >
+            <Caret
+              className={`${currentPage == pages - 1 && "fill-neutral-300"}`}
+            />
           </button>
         </div>
       </section>

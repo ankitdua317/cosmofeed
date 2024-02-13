@@ -7,13 +7,13 @@ import { CartItem } from "@/models/Product";
 import Header from "./Header";
 import Footer from "./Footer";
 
-export default function MyApp({ children }: PropsWithChildren) {
+const MyApp = ({ children }: PropsWithChildren) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const items = getLocalStorageKey<CartItem[], null>(CART_KEY);
-    if (items) {
-      dispatch(updateCart(items));
+    const cartItems = getLocalStorageKey<CartItem[], null>(CART_KEY);
+    if (cartItems) {
+      dispatch(updateCart(cartItems));
     }
   }, [dispatch]);
 
@@ -24,4 +24,6 @@ export default function MyApp({ children }: PropsWithChildren) {
       <Footer />
     </main>
   );
-}
+};
+
+export default MyApp;

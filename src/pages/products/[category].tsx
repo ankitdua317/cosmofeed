@@ -1,10 +1,10 @@
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
+import fetchProductByCategory from "@/api/fetchProductByCategory";
 import ProductCard from "@/components/ProductCard";
 import { ProductData } from "@/models/Product";
 import useProductList from "@/hooks/useProductList";
 import usePagination from "@/hooks/usePagination";
-import fetchProductByCategory from "@/api/fetchProductByCategory";
 import Spinner from "@/components/Spinner";
 
 interface Props {
@@ -53,8 +53,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
     if (initialProductsData) {
       return {
         props: {
-          initialProductsData,
           key: params.category,
+          initialProductsData,
         },
       };
     }
