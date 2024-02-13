@@ -1,7 +1,7 @@
 import { PropsWithChildren, useEffect } from "react";
 import { CART_KEY } from "@/constants/common";
 import { useAppDispatch } from "@/redux/store";
-import { updateCart } from "@/redux/reducers/cart";
+import { updateCart } from "@/redux/reducers/app";
 import Header from "./Header";
 import Footer from "./Footer";
 

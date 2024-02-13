@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { selectCartItems, updateCart } from "@/redux/reducers/cart";
+import { selectCartItems, updateCart } from "@/redux/reducers/app";
 import { Product } from "@/models/Product";
 
 const useAddToCart = (id: number) => {

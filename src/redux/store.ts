@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
-import cartReducer from "./reducers/cart";
+import appReducer from "./reducers/app";
 
 const store = configureStore({
-  reducer: { cart: cartReducer },
+  reducer: { app: appReducer },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
 });

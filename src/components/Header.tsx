@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import fetchAllCategories from "@/api/fetchAllCategories";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { selectCategories, setCategories } from "@/redux/reducers/app";
 import Cart from "@/icons/Cart";
 import User from "@/icons/User";
-import Link from "next/link";
 import Hamburger from "@/icons/Hamburger";
 import SideDrawer from "./SideDrawer";
 
@@ -28,17 +30,20 @@ const AllCategories = ({ list, className }: AllCategoriesProps) => {
 };
 
 const Header = () => {
-  const [allCategories, setAllCategories] = useState<string[]>([]);
+  const dispatch = useAppDispatch();
+  const categories = useAppSelector(selectCategories);
   const [isSideDrawerVisible, setIsSideDrawerVisible] = useState(false);
 
   useEffect(() => {
     const getAllCategories = async () => {
       const response = await fetchAllCategories();
-      setAllCategories(response);
+      dispatch(setCategories(response));
     };
 
-    getAllCategories();
-  }, []);
+    if (categories.length === 0) {
+      getAllCategories();
+    }
+  }, [categories, dispatch]);
 
   return (
     <header className="w-full">
@@ -46,9 +51,9 @@ const Header = () => {
         <h1 className="font-bold text-black">Urban</h1>
       </div>
       <div className="flex items-center justify-between lg:justify-center bg-black py-5 px-6 lg:px-10">
-        {allCategories.length > 0 ? (
+        {categories.length > 0 ? (
           <div className="hidden lg:flex items-center justify-center flex-wrap w-full max-w-2xl xl:max-w-4xl">
-            <AllCategories list={allCategories} className="text-white" />
+            <AllCategories list={categories} className="text-white" />
           </div>
         ) : null}
         <Hamburger
@@ -67,7 +72,7 @@ const Header = () => {
       >
         <div className="flex flex-col py-4 pl-4">
           <h2 className="font-bold my-4">All Categories</h2>
-          <AllCategories list={allCategories} className="text-black" />
+          <AllCategories list={categories} className="text-black" />
         </div>
       </SideDrawer>
     </header>
