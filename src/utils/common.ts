@@ -21,3 +21,16 @@ export function setLocalStorageKey<T>(key: string, value: T) {
 export function removeLocalStorageKey(key: string) {
   storageInUse.removeItem(key);
 }
+
+export function getCookieValue(key: string) {
+  if (typeof window !== "undefined") {
+    const value = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith(`${key}=`))
+      ?.split("=")[1];
+
+    // Cookie value when set to null gets read as a string and hence parsing is required
+    // We are setting vendorId cookie to null in case of non hyperlocal areas
+    return value === "null" ? JSON.parse(value) : value;
+  }
+}

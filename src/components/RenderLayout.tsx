@@ -1,8 +1,12 @@
-import { Banner, Data, ProductCarousal } from "@/models/Home";
+import { Banner, Component, ProductCarousal } from "@/models/Home";
 import BannerImage from "./BannerImage";
 import MultiViewCarousal from "./MultiViewCarousal";
 
-const RenderLayouts = ({ components }: Data) => {
+interface Props {
+  components: Component[];
+}
+
+const RenderLayouts = ({ components }: Props) => {
   return (
     <>
       {components.map(({ name, props }, index) => {

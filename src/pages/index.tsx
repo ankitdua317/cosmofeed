@@ -1,17 +1,34 @@
 import { GetServerSideProps } from "next";
 import fetchHomePageData from "@/api/fetchHomePageData";
 import RenderLayouts from "@/components/RenderLayout";
-import { Data } from "@/models/Home";
+import { Component } from "@/models/Home";
+import { HOME_PAGE_NAME, PAGE_HASH_COOKIE_NAME } from "@/constants/common";
+import usePageCache from "@/hooks/usePageCache";
 
-const Home = ({ components }: Data) => {
+interface Props {
+  components?: Component[];
+}
+
+const Home = ({ components }: Props) => {
+  const { data } = usePageCache(HOME_PAGE_NAME, components);
+
   return (
     <section className="flex min-h-screen flex-col items-center justify-between">
-      <RenderLayouts components={components} />
+      <RenderLayouts components={data || []} />
     </section>
   );
 };
 
-export const getServerSideProps: GetServerSideProps<Data> = async () => {
+export const getServerSideProps: GetServerSideProps<Props> = async ({
+  req: { cookies },
+}) => {
+  const pageHash = cookies[PAGE_HASH_COOKIE_NAME];
+  if (pageHash?.includes(HOME_PAGE_NAME)) {
+    return {
+      props: {},
+    };
+  }
+
   const { components } = await fetchHomePageData();
   return {
     props: {
