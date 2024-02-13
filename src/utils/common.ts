@@ -30,7 +30,21 @@ export function getCookieValue(key: string) {
       ?.split("=")[1];
 
     // Cookie value when set to null gets read as a string and hence parsing is required
-    // We are setting vendorId cookie to null in case of non hyperlocal areas
     return value === "null" ? JSON.parse(value) : value;
   }
 }
+
+export const validateMobileNumber = (value: string) => {
+  const exp = /^[6-9][0-9]{9}$/;
+  return exp.test(value);
+};
+
+export const validatePincode = (value: string) => {
+  const exp = /^[0-9]{6}$/;
+  return exp.test(value);
+};
+
+export const validateCityOrState = (value: string) => {
+  const exp = /^[a-zA-Z]+$/;
+  return exp.test(value);
+};

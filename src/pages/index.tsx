@@ -1,8 +1,14 @@
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 import fetchHomePageData from "@/api/fetchHomePageData";
 import RenderLayouts from "@/components/RenderLayout";
 import { Component } from "@/models/Home";
-import { HOME_PAGE_NAME, PAGE_HASH_COOKIE_NAME } from "@/constants/common";
+import {
+  HOME_PAGE_DESC,
+  HOME_PAGE_NAME,
+  HOME_PAGE_TITLE,
+  PAGE_HASH_COOKIE_NAME,
+} from "@/constants/common";
 import usePageCache from "@/hooks/usePageCache";
 
 interface Props {
@@ -13,9 +19,15 @@ const Home = ({ components }: Props) => {
   const { data } = usePageCache(HOME_PAGE_NAME, components);
 
   return (
-    <section className="flex min-h-screen flex-col items-center justify-between">
-      <RenderLayouts components={data || []} />
-    </section>
+    <>
+      <Head>
+        <meta name="title" content={HOME_PAGE_TITLE} />
+        <meta name="description" content={HOME_PAGE_DESC} />
+      </Head>
+      <section className="flex min-h-screen flex-col items-center justify-between">
+        <RenderLayouts components={data || []} />
+      </section>
+    </>
   );
 };
 

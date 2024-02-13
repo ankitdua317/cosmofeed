@@ -16,6 +16,9 @@ const AllCategories = ({
       {list.map((item, index) => (
         <Link
           key={index}
+          aria-label={item}
+          aria-description={`Navigate to ${item} list`}
+          lang="en"
           href={`/products/${item}`}
           className={`${className} mx-2 my-1 capitalize`}
           onClick={onLinkClick}

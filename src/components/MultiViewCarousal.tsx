@@ -30,7 +30,7 @@ const MultiViewCarousal = ({ products }: ProductCarousal) => {
       <Carousal
         title="Best Seller"
         pages={allImages.length}
-        carouselClassName="flex xl:hidden"
+        carouselClassName="flex gap-2 xl:hidden"
         handlerClassName="flex xl:hidden"
       >
         {allImages.map((images, index) => (
